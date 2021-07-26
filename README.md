@@ -1,17 +1,13 @@
-#Table of Contents
+# Table of contents
+1. [Background](#introduction)
+2. [Some paragraph](#paragraph1)
+3. [Another paragraph](#paragraph2)
 
-[TOCM]
+# Background <a name="introduction"></a>
+Some introduction text, formatted in heading 2 style
 
-[TOC]
+# Some paragraph <a name="paragraph1"></a>
+    The first paragraph text
 
-#Background
-
-Background content
-
-#H1 header
-    Example Code Block
-#H2 header
-#H3 header
-#H4 header
-#H5 header
-#H6 header
+# Another paragraph <a name="paragraph2"></a>
+    The second paragraph text
