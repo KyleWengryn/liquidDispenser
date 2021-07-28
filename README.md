@@ -80,8 +80,7 @@ A 9v battery connecting wires to power relay switches
 
 
 # Software <a name="Software"></a>
-The code was written in Arduino's custom IDE and compiler. It can be downloaded at the link below
-[Arduino IDE](https://www.arduino.cc/en/software)
+The code was written in Arduino's custom IDE and compiler. It can be downloaded [HERE](https://www.arduino.cc/en/software)
 
 ### Setting up the Touch LCD Screen <a name="SetUpLCD"></a>
 There are two header files needed to be able to use both the screen and its touch capabilities. Documentation for the UTFT and URTouch librariers are included in repository folders for each one.
