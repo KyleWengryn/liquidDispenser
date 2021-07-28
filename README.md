@@ -181,7 +181,7 @@ lastTouch = millis();
 ```
 At the beginning of the infinite loop, the time of last touch is compared to 60 seconds. If no one has touched it within 60 seconds, then the screen shuts off until it is tapped again.
 
-```c+=
+```c++
 if ((millis() - lastTouch) > 60000) {
     myGLCD.clrScr();
     currentPage = 2;
