@@ -59,4 +59,33 @@ A 9v battery connecting wires to power relay switches
 
 
 # Software <a name="Software"></a>
-    The second paragraph text
+The code was written in Arduino's custom IDE and compiler. It can be downloaded at the link below
+[Arduino IDE](https://www.arduino.cc/en/software)
+
+### Setting up the Touch LCD Screen
+There are two header files needed to be able to use both the screen and its touch capabilities
+
+```c++
+#include <UTFT.h>
+#include <URTouch.h>
+```
+
+Next, the hardware needs to be initialized. The pins listed are the pins that align with the expansion shield connections as stated in the hardware section
+
+```c++
+UTFT myGLCD(ITDB50,38,39,40,41);
+URTouch myTouch(6, 5, 4, 3, 2);
+```
+
+Retrieving touch information 
+
+```c++
+if (myTouch.dataAvailable()) {
+      myTouch.read();
+      x = myTouch.getX();
+      y = myTouch.getY();
+      lastTouch = millis();
+}
+```
+
+
