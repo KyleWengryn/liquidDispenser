@@ -63,7 +63,7 @@ The code was written in Arduino's custom IDE and compiler. It can be downloaded 
 [Arduino IDE](https://www.arduino.cc/en/software)
 
 ### Setting up the Touch LCD Screen
-There are two header files needed to be able to use both the screen and its touch capabilities
+There are two header files needed to be able to use both the screen and its touch capabilities. Documentation for the UTFT and URTouch librariers are included in repository folders for each one.
 
 ```c++
 #include <UTFT.h>
@@ -77,7 +77,7 @@ UTFT myGLCD(ITDB50,38,39,40,41);
 URTouch myTouch(6, 5, 4, 3, 2);
 ```
 
-Retrieving touch information 
+Retrieving touch information. Data comes in the form of x and y coordinates. These coordinates can then be checked to see if they overlap with the location of a 'button' on the screen.
 
 ```c++
 if (myTouch.dataAvailable()) {
@@ -85,6 +85,31 @@ if (myTouch.dataAvailable()) {
       x = myTouch.getX();
       y = myTouch.getY();
       lastTouch = millis();
+}
+```
+
+Drawing a button on the screen. It is essentially just a rectangle on the screen with coordinates that can be compared to touch coordinates
+
+```c++
+myGLCD.setColor(255, 0, 0);
+myGLCD.fillRoundRect(100,120,242,220);
+```
+
+Simply touching the button and seeing results does not feel naturual. I added a simple button animation so the user can easily confirm if a touch was registered
+
+```c++
+void buttonAnimation(int x1, int y1,int x2,int y2, String num,int x3, int y3) {
+        myGLCD.setColor(169, 169, 169);
+        myGLCD.fillRoundRect(x1,y1,x2,y2);
+        delay(300);
+        myGLCD.setColor(255, 255, 255);
+        myGLCD.fillRoundRect(x1,y1,x2,y2);
+
+        myGLCD.setColor(0, 0, 0);
+        myGLCD.setBackColor(255, 255, 255);
+        myGLCD.setFont(SevenSegNumFont);
+  
+        myGLCD.print(num, x3, y3);
 }
 ```
 
