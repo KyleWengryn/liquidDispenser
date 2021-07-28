@@ -75,6 +75,9 @@ Next, the hardware needs to be initialized. The pins listed are the pins that al
 ```c++
 UTFT myGLCD(ITDB50,38,39,40,41);
 URTouch myTouch(6, 5, 4, 3, 2);
+myGLCD.InitLCD();
+myTouch.InitTouch(LANDSCAPE);
+myTouch.setPrecision(PREC_HI);
 ```
 
 Retrieving touch information. Data comes in the form of x and y coordinates. These coordinates can then be checked to see if they overlap with the location of a 'button' on the screen.
@@ -112,5 +115,81 @@ void buttonAnimation(int x1, int y1,int x2,int y2, String num,int x3, int y3) {
         myGLCD.print(num, x3, y3);
 }
 ```
+
+### Setting up Relay Switches
+The relays take in a digital ouput which determines when to send power to the motor. I first initialized constant values for the pins and then set the pin mode.
+
+```c++
+const int motor1 = 8;
+const int motor2 = 9;
+const int motor3 = 10;
+
+pinMode(motor1, OUTPUT);
+pinMode(motor2, OUTPUT);
+pinMode(motor3, OUTPUT);
+```
+
+### Firing the Motors
+Sending a HIGH ouput to the relay will turn the motor on. Below is an example of a pour determined by pressing and holding the button. The digitalWrite() function is used to send a HIGH signal to the relay.
+
+```c++
+while(myTouch.dataAvailable()) {
+      myTouch.read();
+      digitalWrite(motor, HIGH);
+      myGLCD.setColor(140, 140, 140);
+      myGLCD.fillRoundRect(x1, y1, x2, y2);
+    }
+digitalWrite(motor, LOW);
+```
+
+### Bonus Feature: Including Passcode
+The first menu that appears when powering on the device is a passcode screen. Each number has specific coordinates and a passcode string is concatenated for each press.
+
+```c++
+if((x >= 100) && (x <= 242) && (y >= 120) && (y <= 220)) {
+        buttonAnimation(100, 120, 242, 220, "1", 146, 150);
+        reset = false;
+        passcode += "1";
+        numDigits++;
+        drawAst();
+      }
+```
+
+When the user hits "enter" the passcode is then checked with the passcode initialized in the global variables and access is either granted or denied with a couple of animations
+
+```c++
+void checkPasscode() {
+  if (passcode.length() == 5 && passcode == pass) {
+     myGLCD.setFont(BigFont);
+     myGLCD.setColor(255, 255, 255);
+     myGLCD.setBackColor(0, 150, 51);
+     myGLCD.print("                                       ", CENTER, 49);
+     myGLCD.print("                                       ", CENTER, 65);
+     myGLCD.print("                                       ", CENTER, 81);
+     myGLCD.print("-Access Granted-", CENTER, 65);
+     delay(1000);
+     currentPage = 1;
+     drawHomeScreen();
+  } else {
+```
+
+### Bonus Feature: Screen timer
+Every time the screen is touched, the time of the touch is recorded.
+
+```c++
+lastTouch = millis();
+```
+At the beginning of the infinite loop, the time of last touch is compared to 60 seconds. If no one has touched it within 60 seconds, then the screen shuts off until it is tapped again.
+
+```c+=
+if ((millis() - lastTouch) > 60000) {
+    myGLCD.clrScr();
+    currentPage = 2;
+  }
+```
+
+
+
+
 
 
