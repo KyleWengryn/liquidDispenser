@@ -1,5 +1,6 @@
 # DIY LCD Touch Liquid Dispenser
 Arduino-based, multi-tank, touch enabled liquid dispenser
+
 ## Table of contents
 1. [Background](#introduction)
 2. [Hardware](#Hardware)
@@ -27,7 +28,7 @@ Arduino-based, multi-tank, touch enabled liquid dispenser
       e. [Bonus Feature: Screen Timer](#Timer)
 
 ## Background <a name="introduction"></a>
-<img src="/images/IMG_4447.jpg" alt="tap" width="200"/>
+<img src="IMG_4447.jpg" alt="tap" width="200"/>
 
 This is a personal project I designed and created in the beginning of 2020. It is an arduino powered dispenser with an LCD touch screen and three different tanks. It is powered via a converted 9v power supply from a traditional wall outlet in the United States. Three separate relay switches are connected to a separate 9v power source and are controlled through the arduino outputs. The relays are then connected to three liquid pumps respectively that drive the flow of liquid from the tanks to the spouts. All hardware and plumbing can be found online and are relatively inexpensive. 
 
